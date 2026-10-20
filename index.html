@@ -211,6 +211,22 @@ button,a{-webkit-tap-highlight-color:transparent}
 .carousel-dots{gap:0}.carousel-dot{width:31px}
 }
 @media(prefers-reduced-motion:reduce){.hero-carousel-link img,.carousel-dot:after{transition:none}}
+
+/* Verified documents: logos cropped in-browser from original user-supplied letters. */
+.trusted{padding:100px 0 98px;background:#f0ebe4;border-bottom:1px solid var(--border)}
+.trusted-top{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:48px;margin-bottom:39px}
+.trusted-top .eyebrow{margin-bottom:15px}
+.trusted-top h2{font:italic 400 clamp(49px,6.1vw,84px)/1.05 Georgia,'Times New Roman',serif;letter-spacing:-.06em;margin:0}
+.trusted-text{justify-self:end;max-width:425px}
+.trusted-text p{font-size:15px;line-height:1.55;color:#665e56;margin:0 0 19px}
+.trusted-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.trusted-logo{display:flex;align-items:center;justify-content:center;min-width:0;min-height:177px;padding:23px 17px;background:#fffdfa;border:1px solid #e0d7cc;transition:transform .2s,border-color .2s}
+.trusted-logo:hover{transform:translateY(-3px);border-color:#b8a79c}
+.trusted-logo:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.trusted-logo svg{width:100%;height:113px;max-width:235px;display:block;overflow:hidden}
+@media(max-width:950px){.trusted-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trusted-logo{min-height:158px}}
+@media(max-width:740px){.trusted{padding:73px 0}.trusted-top{grid-template-columns:1fr;gap:13px;margin-bottom:30px}.trusted-top h2{font-size:60px}.trusted-text{justify-self:start;max-width:560px}.trusted-text p{font-size:14px}}
+@media(max-width:480px){.trusted-grid{gap:9px}.trusted-logo{padding:15px 10px;min-height:145px}.trusted-logo svg{height:104px}}
 </style>
 </head>
 <body>
@@ -302,6 +318,17 @@ button,a{-webkit-tap-highlight-color:transparent}
 <div class="feature-item"><span class="n">03</span><h3>Впечатления и результат</h3><p>Программа, гости, внимание к деталям и память о событии.</p></div>
 </div></div>
 </section>
+<section class="trusted" id="trusted-brands">
+<div class="wrap">
+<div class="trusted-top"><div><div class="eyebrow orange">Подтверждено документами</div><h2>Нам <span class="serif">доверяют.</span></h2></div>
+<div class="trusted-text"><p>Знаки организаций, от которых мы получили реальные благодарственные письма. Оригинал каждого письма открывается по нажатию.</p><a href="letters.html" class="text-link">Все благодарности ↗</a></div></div>
+<div class="trusted-grid">
+<a class="trusted-logo" href="assets/letters/photo_6_2026-10-19_15-38-13.jpg" target="_blank" rel="noopener noreferrer" aria-label="ООО «НурГаз»: открыть оригинальное благодарственное письмо"><svg viewBox="109 26 204 156" role="img" aria-label="Логотип ООО «НурГаз»" focusable="false" preserveAspectRatio="xMidYMid meet"><image href="assets/letters/photo_6_2026-10-19_15-38-13.jpg" x="0" y="0" width="929" height="1280" preserveAspectRatio="none"/></svg></a>
+<a class="trusted-logo" href="assets/letters/photo_9_2026-10-19_15-38-13.jpg" target="_blank" rel="noopener noreferrer" aria-label="БФ «Будущее поколение»: открыть оригинальное благодарственное письмо"><svg viewBox="605 60 305 214" role="img" aria-label="Логотип БФ «Будущее поколение»" focusable="false" preserveAspectRatio="xMidYMid meet"><image href="assets/letters/photo_9_2026-10-19_15-38-13.jpg" x="0" y="0" width="960" height="1280" preserveAspectRatio="none"/></svg></a>
+<a class="trusted-logo" href="assets/letters/photo_10_2026-10-19_15-38-13.jpg" target="_blank" rel="noopener noreferrer" aria-label="Банный комплекс «Бани у Дани»: открыть оригинальное благодарственное письмо"><svg viewBox="70 18 277 222" role="img" aria-label="Логотип Банный комплекс «Бани у Дани»" focusable="false" preserveAspectRatio="xMidYMid meet"><image href="assets/letters/photo_10_2026-10-19_15-38-13.jpg" x="0" y="0" width="922" height="1280" preserveAspectRatio="none"/></svg></a>
+<a class="trusted-logo" href="assets/letters/photo_5_2026-10-19_15-38-13.jpg" target="_blank" rel="noopener noreferrer" aria-label="УДЦ «Партнёр»: открыть оригинальное благодарственное письмо"><svg viewBox="102 34 760 147" role="img" aria-label="Логотип УДЦ «Партнёр»" focusable="false" preserveAspectRatio="xMidYMid meet"><image href="assets/letters/photo_5_2026-10-19_15-38-13.jpg" x="0" y="0" width="923" height="1280" preserveAspectRatio="none"/></svg></a>
+</div>
+</div></section>
 <section class="testimonials" id="letters">
 <div class="wrap">
 <div class="section-head"><div><div class="eyebrow">Документы и доверие</div><h2>Не слова.<br><span class="orange">Благодарности.</span></h2></div><p>Настоящие письма от тех, с кем мы работали. Каждый документ можно открыть в оригинале.</p></div>
