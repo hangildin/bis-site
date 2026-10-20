@@ -273,6 +273,16 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:1080px){.hero-title{font-size:clamp(47px,5.9vw,78px)}}
 @media(max-width:740px){.hero-title{font-size:clamp(49px,10.5vw,76px)}.intro-facts{gap:13px;margin-top:34px}}
 @media(max-width:480px){.hero-title{font-size:clamp(44px,11vw,58px)}.intro-facts{grid-template-columns:1fr 1fr;gap:19px}.intro-fact strong{font-size:25px}.contact-max-note{font-size:11px}}
+
+.letter-first-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 auto 16px;width:min(780px,100%)}
+.letter-quick{padding:14px 11px;text-align:left;background:#fffdfa;border:1px solid var(--border);color:var(--ink);cursor:pointer;display:flex;gap:11px;align-items:baseline;font:700 13px/1.3 Arial,Helvetica,sans-serif;min-width:0}
+.letter-quick span{color:var(--accent);font:italic 20px Georgia,serif}
+.letter-quick.is-active{border-color:var(--accent)}
+.letter-quick:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.letter-paper.letter-pdf{position:relative;background:#eae7e1}
+.letter-paper iframe{width:min(100%,450px);height:100%;background:#fff;border:none;pointer-events:none}
+.letter-pdf-label{position:absolute;left:10px;bottom:10px;background:rgba(255,253,250,.95);color:#625b55;border:1px solid var(--border);padding:5px 9px;font-size:10px;pointer-events:none}
+@media(max-width:600px){.letter-first-three{gap:5px}.letter-quick{font-size:10px;gap:5px;padding:10px 6px}.letter-quick span{font-size:15px}}
 </style>
 </head>
 <body>
@@ -378,21 +388,28 @@ button,a{-webkit-tap-highlight-color:transparent}
 <section class="testimonials" id="letters" aria-labelledby="letters-heading">
 <div class="wrap">
 <div class="section-head"><div><div class="eyebrow">Документы и доверие</div><h2 id="letters-heading">Отзывы <span class="orange">и благодарности.</span></h2></div></div>
+<div class="letter-first-three" role="group" aria-label="Основные благодарности">
+<button class="letter-quick is-active" type="button" data-letter-quick="0"><span>01</span>Мэрия Казани</button>
+<button class="letter-quick" type="button" data-letter-quick="1"><span>02</span>«Химград»</button>
+<button class="letter-quick" type="button" data-letter-quick="2"><span>03</span>Черноголовка</button>
+</div>
 <div class="letter-carousel" id="letterCarousel" role="region" aria-roledescription="карусель" aria-label="Благодарственные письма">
-<div class="letter-track" id="letterTrack" tabindex="0" aria-label="Галерея писем: листайте вправо и влево">
-<article class="letter-slide" aria-label="Документ 1 из 9: Мэрия Казани"><div class="letter-paper"><img src="assets/letters/photo_7_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Мэрия Казани" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Мэрия Казани</h3></div></article>
-<article class="letter-slide" aria-label="Документ 2 из 9: Федерация профсоюзов Республики Татарстан"><div class="letter-paper"><img src="assets/letters/photo_2_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Федерация профсоюзов Республики Татарстан" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>Федерация профсоюзов Республики Татарстан</h3></div></article>
-<article class="letter-slide" aria-label="Документ 3 из 9: БФ «Будущее поколение»"><div class="letter-paper"><img src="assets/letters/photo_9_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: БФ «Будущее поколение»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>БФ «Будущее поколение»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 4 из 9: ООО «НурГаз»"><div class="letter-paper"><img src="assets/letters/photo_6_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: ООО «НурГаз»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>ООО «НурГаз»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 5 из 9: Фонд «Ярдам-Помощь»"><div class="letter-paper"><img src="assets/letters/photo_1_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Фонд «Ярдам-Помощь»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Фонд «Ярдам-Помощь»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 6 из 9: АНО «Всё для детей»"><div class="letter-paper"><img src="assets/letters/photo_8_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: АНО «Всё для детей»" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>АНО «Всё для детей»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 7 из 9: Банный комплекс «Бани у Дани»"><div class="letter-paper"><img src="assets/letters/photo_10_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Банный комплекс «Бани у Дани»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Банный комплекс «Бани у Дани»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 8 из 9: УДЦ «Партнёр»"><div class="letter-paper"><img src="assets/letters/photo_5_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: УДЦ «Партнёр»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>УДЦ «Партнёр»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 9 из 9: «Эрудит-Селдом»"><div class="letter-paper"><img src="assets/letters/photo_4_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: «Эрудит-Селдом»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>«Эрудит-Селдом»</h3></div></article>
+<div class="letter-track" id="letterTrack" tabindex="0" aria-label="Галерея благодарностей: листайте вправо и влево">
+<article class="letter-slide" aria-label="Документ 1 из 11: Мэрия Казани"><div class="letter-paper"><img src="assets/letters/photo_7_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Мэрия Казани" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Мэрия Казани</h3></div></article>
+<article class="letter-slide" aria-label="Документ 2 из 11: Технополис «Химград»"><div class="letter-paper letter-pdf"><iframe src="assets/letters/%D0%A5%D0%B8%D0%BC%D0%B3%D1%80%D0%B0%D0%B4_%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%98%D0%9F_%D0%A1%D1%83%D0%BF%D0%BE%D0%BD%D0%B8%D0%BD%D0%B0_%D0%90_%D0%98_.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" title="Просмотр письма Технополис «Химград»" loading="lazy" tabindex="-1"></iframe><span class="letter-pdf-label">PDF · Благодарственное письмо</span></div><div class="letter-slide-caption"><h3>Технополис «Химград»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 3 из 11: День города Черноголовки"><div class="letter-paper letter-pdf"><iframe src="assets/letters/%D0%94%D0%B5%D0%BD%D1%8C_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%A7%D0%B5%D1%80%D0%BD%D0%BE%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" title="Просмотр письма День города Черноголовки" loading="lazy" tabindex="-1"></iframe><span class="letter-pdf-label">PDF · Благодарственное письмо</span></div><div class="letter-slide-caption"><h3>День города Черноголовки</h3></div></article>
+<article class="letter-slide" aria-label="Документ 4 из 11: Федерация профсоюзов Республики Татарстан"><div class="letter-paper"><img src="assets/letters/photo_2_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Федерация профсоюзов Республики Татарстан" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>Федерация профсоюзов Республики Татарстан</h3></div></article>
+<article class="letter-slide" aria-label="Документ 5 из 11: БФ «Будущее поколение»"><div class="letter-paper"><img src="assets/letters/photo_9_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: БФ «Будущее поколение»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>БФ «Будущее поколение»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 6 из 11: ООО «НурГаз»"><div class="letter-paper"><img src="assets/letters/photo_6_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: ООО «НурГаз»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>ООО «НурГаз»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 7 из 11: Фонд «Ярдам-Помощь»"><div class="letter-paper"><img src="assets/letters/photo_1_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Фонд «Ярдам-Помощь»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Фонд «Ярдам-Помощь»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 8 из 11: АНО «Всё для детей»"><div class="letter-paper"><img src="assets/letters/photo_8_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: АНО «Всё для детей»" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>АНО «Всё для детей»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 9 из 11: Банный комплекс «Бани у Дани»"><div class="letter-paper"><img src="assets/letters/photo_10_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Банный комплекс «Бани у Дани»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Банный комплекс «Бани у Дани»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 10 из 11: УДЦ «Партнёр»"><div class="letter-paper"><img src="assets/letters/photo_5_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: УДЦ «Партнёр»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>УДЦ «Партнёр»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 11 из 11: «Эрудит-Селдом»"><div class="letter-paper"><img src="assets/letters/photo_4_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: «Эрудит-Селдом»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>«Эрудит-Селдом»</h3></div></article>
 </div>
 <div class="letter-controls">
 
-<div class="letter-nav"><span class="letter-count" id="letterCount" aria-live="off">01 / 09</span><button class="letter-nav-btn" id="letterPrev" type="button" aria-label="Предыдущее письмо">←</button><button class="letter-nav-btn" id="letterNext" type="button" aria-label="Следующее письмо">→</button></div>
+<div class="letter-nav"><span class="letter-count" id="letterCount" aria-live="off">01 / 11</span><button class="letter-nav-btn" id="letterPrev" type="button" aria-label="Предыдущее письмо">←</button><button class="letter-nav-btn" id="letterNext" type="button" aria-label="Следующее письмо">→</button></div>
 </div>
 </div>
 </div>
@@ -509,6 +526,7 @@ const prev=document.getElementById("letterPrev");
 const next=document.getElementById("letterNext");
 const counter=document.getElementById("letterCount");
 const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+const quick=Array.from(document.querySelectorAll("[data-letter-quick]"));
 const desktop=window.matchMedia("(min-width: 741px) and (prefers-reduced-motion: no-preference)");
 let paused=false,hovered=false,focused=false;
 function closestSlide(){
@@ -521,6 +539,7 @@ return best
 }
 function refresh(){
 const i=closestSlide();
+quick.forEach((b,n)=>b.classList.toggle("is-active",i===n));
 const end=track.scrollLeft>=track.scrollWidth-track.clientWidth-3;
 counter.textContent=(end?String(slides.length).padStart(2,"0"):String(i+1).padStart(2,"0"))+" / "+String(slides.length).padStart(2,"0");
 prev.disabled=false;
@@ -532,10 +551,12 @@ let i=closestSlide()+dir;
 if(i>=slides.length)i=0;
 if(i<0)i=slides.length-1;
 track.scrollTo({left:slides[i].offsetLeft-slides[0].offsetLeft,behavior:reduced.matches?"instant":"smooth"});
+quick.forEach((b,n)=>b.classList.toggle("is-active",i===n));
 counter.textContent=String(i+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
 prev.disabled=false;
 next.disabled=false;
 }
+quick.forEach((button,i)=>button.addEventListener("click",()=>{paused=true;track.scrollTo({left:slides[i].offsetLeft-slides[0].offsetLeft,behavior:reduced.matches?"instant":"smooth"});quick.forEach((b,n)=>b.classList.toggle("is-active",i===n));counter.textContent=String(i+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0")}));
 prev.addEventListener("click",()=>go(-1));
 next.addEventListener("click",()=>go(1));
 track.addEventListener("mouseenter",()=>hovered=true);
