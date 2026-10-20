@@ -48,10 +48,17 @@ h1 em{color:var(--orange);font-style:italic}
 footer{background:#151412;color:#ddd;padding:23px 0;font-size:12px}
 @media(max-width:900px){.letters{grid-template-columns:repeat(2,minmax(0,1fr))}.preview{height:350px}}
 @media(max-width:610px){.nav{min-height:65px}.logo{font-size:29px}.nav-links{gap:14px}.nav-links a{font-size:12px}.hero{padding:64px 0 45px}h1{font-size:clamp(54px,12vw,75px)}.letters{grid-template-columns:1fr;gap:16px;padding-bottom:65px}.preview{height:380px}.section-top{gap:17px}.filter{padding:11px 13px;font-size:12px}.bottom{padding:55px 0}.note{padding-bottom:45px}}
+
+/* Consistent Bис* identity on every page */
+.logo{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;white-space:nowrap;line-height:1;flex-shrink:0}
+.logo .brand-name{display:block;font-size:inherit;line-height:.98;letter-spacing:inherit}
+.logo .brand-caption{display:block;font:800 8px/1.15 Arial,Helvetica,sans-serif;letter-spacing:.12em;color:inherit;white-space:nowrap}
+@media(max-width:700px){.logo .brand-caption{font-size:7.2px}}
+@media(max-width:470px){nav,.nav{flex-wrap:wrap;row-gap:8px;padding-top:9px;padding-bottom:9px}nav>a:not(.logo),.nav>a:not(.logo){font-size:11px}nav .links,.nav-links{gap:10px}}
 </style>
 </head>
 <body>
-<header><nav class="nav wrap" aria-label="Главное меню"><a class="logo" href="index.html">Бис<b>*</b></a><div class="nav-links"><a href="projects.html">Проекты</a><a href="letters.html" aria-current="page">Благодарности</a><a href="index.html#contacts">Контакты</a></div></nav></header>
+<header><nav class="nav wrap" aria-label="Главное меню"><a class="logo" href="index.html" translate="no"><span class="brand-name">Бис<b>*</b></span><span class="brand-caption">БОЛЬШИЕ ИНТЕРЕСНЫЕ СОБЫТИЯ</span></a><div class="nav-links"><a href="projects.html">Проекты</a><a href="letters.html" aria-current="page">Благодарности</a><a href="index.html#contacts">Контакты</a></div></nav></header>
 <main>
 <section class="hero wrap"><div class="eyebrow">Наши партнёры и заказчики</div><h1>Благодарности <em>и отзывы.</em></h1><p class="lead">Не обещания на словах, а настоящие документы от тех, с кем мы создавали события.</p></section>
 <section class="wrap" aria-label="Галерея благодарностей">
@@ -75,7 +82,7 @@ footer{background:#151412;color:#ddd;padding:23px 0;font-size:12px}
 </section>
 <section class="bottom"><div class="wrap"><h2>Давайте создадим ваше событие.</h2><a href="index.html#contacts">Обсудить проект ↗</a></div></section>
 </main>
-<footer><div class="wrap">Бис* · Агентство событий · Казань</div></footer>
+<footer><div class="wrap">Бис* · Агентство событий · Работаем по всей России</div></footer>
 <script>
 (function(){
 const buttons=Array.from(document.querySelectorAll('[data-filter]'));
