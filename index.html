@@ -168,6 +168,49 @@ button,a{-webkit-tap-highlight-color:transparent}
 .contact h2{font-size:55px}.contact-link{font-size:21px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Real-photo carousel: natural visuals, explicit controls, no layout shift */
+.hero-carousel{display:flex;flex-direction:column;min-width:0;background:#eae5de}
+.hero-carousel-media{position:relative;flex:1;min-height:600px;background:#403a34;overflow:hidden;touch-action:pan-y}
+.hero-carousel-link{display:block;position:absolute;inset:0;z-index:1}
+.hero-carousel-link img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition:opacity .18s ease}
+.hero-carousel-link img.is-changing{opacity:.45}
+.hero-carousel-media:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 49%,rgba(0,0,0,.67) 100%);z-index:1;pointer-events:none}
+.hero-carousel-overlay{position:absolute;z-index:2;pointer-events:none;left:30px;bottom:27px;max-width:calc(100% - 150px);color:#fff}
+.hero-carousel-overlay .eyebrow{font-size:10px;color:#f0e5dc;letter-spacing:.16em;line-height:1.55}
+.hero-carousel-overlay strong{display:block;font-size:clamp(19px,2vw,28px);line-height:1.12;font-weight:700;letter-spacing:-.025em;margin:8px 0}
+.slide-prompt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#ffd0bd}
+.carousel-arrows{position:absolute;z-index:3;bottom:29px;right:24px;display:flex;gap:8px}
+.carousel-arrow{height:47px;width:47px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.8);background:rgba(23,22,20,.55);color:white;font-size:23px;cursor:pointer;transition:background .2s}
+.carousel-arrow:hover,.carousel-arrow:focus-visible{background:var(--accent);border-color:var(--accent)}
+.carousel-bottom{min-height:57px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#e8e2da;padding:7px 20px}
+.carousel-counter{font:italic 16px Georgia,serif;color:#4b453f;letter-spacing:.035em;white-space:nowrap;min-width:55px}
+.carousel-dots{display:flex;align-items:center;justify-content:center;gap:2px;flex:1}
+.carousel-dot{appearance:none;border:0;padding:0;width:35px;height:36px;display:grid;place-items:center;background:transparent;cursor:pointer}
+.carousel-dot:after{content:'';display:block;border-radius:999px;width:7px;height:7px;background:#9a9084;transition:background .2s,width .2s}
+.carousel-dot.is-active:after{background:var(--accent);width:24px}
+.carousel-dot:hover:after{background:var(--ink)}
+.carousel-play{border:1px solid #9b9085;background:transparent;display:grid;place-items:center;width:37px;height:35px;color:var(--ink);font-size:16px;cursor:pointer}
+.carousel-play:hover,.carousel-play:focus-visible{background:var(--ink);color:white}
+.carousel-arrow:focus-visible,.carousel-dot:focus-visible,.carousel-play:focus-visible,.hero-carousel-link:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1080px){.hero-carousel-media{min-height:520px}}
+@media(max-width:740px){
+.hero-carousel-media{min-height:0;height:clamp(330px,75vw,570px);flex:none}
+.hero-carousel-overlay{left:18px;bottom:19px;max-width:calc(100% - 135px)}
+.hero-carousel-overlay .eyebrow{font-size:9px}
+.hero-carousel-overlay strong{font-size:20px}
+.carousel-arrows{right:13px;bottom:19px;gap:6px}
+.carousel-arrow{width:46px;height:46px}
+.carousel-bottom{padding:7px 11px}
+}
+@media(max-width:480px){
+.hero-carousel-media{height:375px}
+.hero-carousel-overlay strong{font-size:19px}
+.hero-carousel-overlay .eyebrow{font-size:9px;letter-spacing:.10em}
+.carousel-dots{gap:0}.carousel-dot{width:31px}
+}
+@media(prefers-reduced-motion:reduce){.hero-carousel-link img,.carousel-dot:after{transition:none}}
 </style>
 </head>
 <body>
@@ -189,10 +232,35 @@ button,a{-webkit-tap-highlight-color:transparent}
 <div class="hero-actions"><a class="btn btn-orange" href="#projects">Наши проекты <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#contacts">Связаться <span aria-hidden="true">↗</span></a></div>
 </div>
 </div>
-<a class="hero-media" href="zelenodolsk.html" aria-label="Посмотреть проект День города Зеленодольска">
-<img src="assets/zelenodolsk/photo_4_2026-10-19_15-18-08.jpg" alt="Зрители на празднике Дня города Зеленодольска, живые эмоции на концерте" width="1920" height="1280" fetchpriority="high" decoding="async">
-<div class="hero-image-label"><div><div class="eyebrow">Реальный проект / День города</div><strong>Зеленодольск · Фотография с мероприятия</strong></div><span class="arrow" aria-hidden="true">↗</span></div>
+<div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="карусель" aria-label="Фотографии реализованных мероприятий">
+<div class="hero-carousel-media">
+<a class="hero-carousel-link" id="heroSlideLink" href="zelenodolsk.html" aria-label="Открыть проект «День города Зеленодольска»">
+<img id="heroSlideImage" src="assets/zelenodolsk/photo_4_2026-10-19_15-18-08.jpg" alt="Реальные зрители праздника Дня города Зеленодольска" width="1920" height="1280" fetchpriority="high" decoding="async">
 </a>
+<div class="hero-carousel-overlay" aria-hidden="true">
+<div class="eyebrow" id="heroSlideCategory">Городской праздник · Зеленодольск</div>
+<strong id="heroSlideName">День города Зеленодольска</strong>
+<span class="slide-prompt">Открыть проект ↗</span>
+</div>
+<div class="carousel-arrows">
+<button class="carousel-arrow" type="button" id="heroPrev" aria-label="Предыдущая фотография">←</button>
+<button class="carousel-arrow" type="button" id="heroNext" aria-label="Следующая фотография">→</button>
+</div>
+</div>
+<div class="carousel-bottom">
+<span class="carousel-counter" id="heroCounter" aria-hidden="true">01 / 06</span>
+<div class="carousel-dots" id="heroDots" role="group" aria-label="Выбор фотографии">
+<button class="carousel-dot is-active" type="button" data-slide="0" aria-label="Фото 1: Зеленодольск" aria-current="true"></button>
+<button class="carousel-dot" type="button" data-slide="1" aria-label="Фото 2: Kastamonu Entegre"></button>
+<button class="carousel-dot" type="button" data-slide="2" aria-label="Фото 3: ХимФест"></button>
+<button class="carousel-dot" type="button" data-slide="3" aria-label="Фото 4: свадьба на Пхукете"></button>
+<button class="carousel-dot" type="button" data-slide="4" aria-label="Фото 5: молодёжная спартакиада"></button>
+<button class="carousel-dot" type="button" data-slide="5" aria-label="Фото 6: фестиваль добрых дел"></button>
+</div>
+<button class="carousel-play" type="button" id="heroPlayPause" aria-label="Приостановить автоматическую смену фотографий" title="Пауза"><span aria-hidden="true">Ⅱ</span></button>
+</div>
+<div class="sr-only" id="heroAnnouncement" role="status" aria-live="polite" aria-atomic="true"></div>
+</div>
 </div>
 </section>
 <div class="line"><div class="wrap strip"><div class="strip-content"><span>Городские события</span><span class="star">✳</span><span>Бренд-события</span><span class="star">✳</span><span>Спортивные мероприятия</span><span class="star">✳</span><span>Частные события</span></div></div></div>
@@ -256,5 +324,97 @@ button,a{-webkit-tap-highlight-color:transparent}
 </section>
 </main>
 <footer class="footer"><div class="wrap footer-row"><span>Бис* · Агентство событий · Казань</span><span>Люди. Города. События.</span><a href="#top">Наверх ↑</a></div></footer>
-</body>
+<script>
+(function(){
+"use strict";
+const root=document.getElementById("heroCarousel");
+if(!root)return;
+const slides=[
+{src:"assets/zelenodolsk/photo_4_2026-10-19_15-18-08.jpg",href:"zelenodolsk.html",name:"День города Зеленодольска",category:"Городской праздник · Зеленодольск",alt:"Зрители праздника Дня города Зеленодольска"},
+{src:"assets/kastamonu/photo_9_2026-10-19_15-24-04.jpg",href:"kastamonu.html",name:"Kastamonu Entegre",category:"Презентация бренда · 300 гостей",alt:"Реальное событие Kastamonu Entegre, гости у праздничных тортов"},
+{src:"assets/himfest/IMG_3942.jpeg",href:"himfest.html",name:"«ХимФест»",category:"Фестиваль · Технополис «Химград»",alt:"Ведущая на сцене фестиваля ХимФест во время интерактивного представления"},
+{src:"assets/phuket-wedding/photo_2_2026-10-19_15-27-18.jpg",href:"phuket-wedding.html",name:"Свадьба на Пхукете",category:"Частное событие · Пхукет",alt:"Настоящая свадебная церемония у моря с гостями и цветочной аркой"},
+{src:"assets/spartakiada/photo_6_2026-10-19_15-26-12.jpg",href:"spartakiada.html",name:"Молодёжная спартакиада",category:"Спортивное событие · Красноярск",alt:"Участники молодёжной спартакиады на общей фотографии после награждения"},
+{src:"assets/festival-dobryh-del/photo_5_2026-10-19_15-26-47.jpg",href:"festival-dobryh-del.html",name:"Фестиваль добрых дел",category:"Благотворительный проект · Казань",alt:"Дети на мастер-классе по росписи во время фестиваля добрых дел"}
+];
+const img=document.getElementById("heroSlideImage");
+const link=document.getElementById("heroSlideLink");
+const name=document.getElementById("heroSlideName");
+const category=document.getElementById("heroSlideCategory");
+const counter=document.getElementById("heroCounter");
+const announcement=document.getElementById("heroAnnouncement");
+const pauseBtn=document.getElementById("heroPlayPause");
+const dots=Array.from(root.querySelectorAll(".carousel-dot"));
+const desktopMotion=window.matchMedia("(min-width:741px) and (prefers-reduced-motion:no-preference)");
+let index=0,playing=desktopMotion.matches,busy=false,hover=false,focusWithin=false,lastSwipe=0;
+let touchStart=null;
+let timer=null;
+function updateToggle(){
+pauseBtn.querySelector("span").textContent=playing?"Ⅱ":"▶";
+pauseBtn.setAttribute("aria-label",playing?"Приостановить автоматическую смену фотографий":"Включить автоматическую смену фотографий");
+pauseBtn.title=playing?"Пауза":"Воспроизвести";
+}
+function show(next,manual){
+if(manual){playing=false;updateToggle()}
+const target=(next+slides.length)%slides.length;
+if(busy||target===index)return;
+busy=true;
+const item=slides[target];
+const preloader=new Image();
+const apply=function(){
+img.classList.add("is-changing");
+window.setTimeout(function(){
+img.src=item.src;
+img.alt=item.alt;
+link.href=item.href;
+link.setAttribute("aria-label","Открыть проект «"+item.name+"»");
+name.textContent=item.name;
+category.textContent=item.category;
+counter.textContent=String(target+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
+dots.forEach(function(dot,i){dot.classList.toggle("is-active",i===target);if(i===target)dot.setAttribute("aria-current","true");else dot.removeAttribute("aria-current")});
+index=target;
+img.classList.remove("is-changing");
+busy=false;
+if(manual)announcement.textContent="Фото "+(index+1)+" из "+slides.length+": "+item.name;
+const later=new Image();later.src=slides[(index+1)%slides.length].src;
+},180);
+};
+preloader.onload=apply;
+preloader.onerror=function(){busy=false;img.classList.remove("is-changing")};
+preloader.src=item.src;
+if(preloader.complete&&preloader.naturalWidth)apply();
+}
+function setAuto(){
+if(timer)window.clearInterval(timer);
+timer=window.setInterval(function(){
+if(playing&&desktopMotion.matches&&!hover&&!focusWithin&&!document.hidden)show(index+1,false);
+},7000);
+}
+document.getElementById("heroPrev").addEventListener("click",()=>show(index-1,true));
+document.getElementById("heroNext").addEventListener("click",()=>show(index+1,true));
+dots.forEach(function(dot,i){dot.addEventListener("click",()=>show(i,true))});
+pauseBtn.addEventListener("click",function(){
+playing=!playing;
+updateToggle();
+});
+root.addEventListener("mouseenter",()=>hover=true);
+root.addEventListener("mouseleave",()=>hover=false);
+root.addEventListener("focusin",()=>focusWithin=true);
+root.addEventListener("focusout",function(){window.setTimeout(()=>focusWithin=root.contains(document.activeElement),0)});
+root.addEventListener("keydown",function(e){
+if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();show(index+(e.key==="ArrowRight"?1:-1),true)}
+});
+root.addEventListener("touchstart",function(e){if(e.touches.length!==1)return;touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});
+root.addEventListener("touchend",function(e){
+if(!touchStart||e.changedTouches.length!==1)return;
+const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;
+touchStart=null;
+if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5){lastSwipe=Date.now();show(index+(dx<0?1:-1),true)}
+},{passive:true});
+link.addEventListener("click",function(e){if(Date.now()-lastSwipe<550)e.preventDefault()});
+if(desktopMotion.addEventListener)desktopMotion.addEventListener("change",function(e){if(!e.matches){playing=false;updateToggle()}});
+updateToggle();
+setAuto();
+})();
+</script></body>
 </html>
