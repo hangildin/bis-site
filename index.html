@@ -94,7 +94,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .feature-item .n{font:italic 29px Georgia,serif;color:#e67450}
 .feature-item h3{font-size:19px;font-weight:700;letter-spacing:-.02em;margin:20px 0 10px}
 .feature-item p{font-size:14px;color:#b9b0a8;line-height:1.65;max-width:340px;margin:0}
-.testimonials{padding:113px 0 111px}
+.testimonials{padding:85px 0 95px}
 .testimonials-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
 .testimonial-photo{background:#e9e3dc;position:relative;height:390px;overflow:hidden}
 .testimonial-photo img{width:100%;height:100%;object-fit:contain;background:#eee9e3}
@@ -152,7 +152,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .project-card h3{font-size:clamp(24px,4.5vw,37px)}.project-card p{font-size:12px}
 .project-card .project-info{padding-top:14px}.project-meta{font-size:9px}.projects-footer{margin-top:45px}
 .feature{padding:74px 0}.feature-top{grid-template-columns:1fr;gap:15px}.feature-top h2{font-size:60px}.feature-top p{justify-self:start;font-size:15px}.feature-grid{gap:15px}.feature-item h3{font-size:16px}
-.testimonials{padding:77px 0}.testimonials-grid{grid-template-columns:1fr}.testimonial-stack{display:grid;grid-template-columns:1fr 1fr}.testimonial-intro{grid-column:span 2}.testimonial-card{display:block;padding:12px}.testimonial-card .testimonial-photo{height:220px}.testimonial-card h3{font-size:24px}.testimonial-card p{font-size:12px}
+.testimonials{padding:65px 0}.testimonials-grid{grid-template-columns:1fr}.testimonial-stack{display:grid;grid-template-columns:1fr 1fr}.testimonial-intro{grid-column:span 2}.testimonial-card{display:block;padding:12px}.testimonial-card .testimonial-photo{height:220px}.testimonial-card h3{font-size:24px}.testimonial-card p{font-size:12px}
 .contact{padding:76px 0}.contact-grid{grid-template-columns:1fr;gap:32px}.contact h2{font-size:65px}.contact-copy p{font-size:16px;margin-bottom:19px}
 .footer-row{align-items:start;flex-direction:column;gap:12px}
 }
@@ -229,18 +229,18 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:480px){.trusted-grid{gap:9px}.trusted-logo{padding:15px 10px;min-height:145px}.trusted-logo svg{height:104px}}
 
 /* Letter gallery: scroll-snap instead of links to originals; keeps original images untouched. */
-.letter-carousel{width:100%;min-width:0}
-.letter-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 22px)/2);gap:22px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 0 4px;outline-offset:5px}
+.letter-carousel{width:min(780px,100%);min-width:0;margin:0 auto}
+.letter-track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;gap:22px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 0 4px;outline-offset:5px}
 .letter-track::-webkit-scrollbar{display:none}
 .letter-track:focus-visible{outline:2px solid var(--accent)}
 .letter-slide{scroll-snap-align:start;scroll-snap-stop:always;min-width:0;background:#fffdfa;border:1px solid var(--border)}
-.letter-paper{height:600px;display:flex;justify-content:center;align-items:center;overflow:hidden;padding:23px;background:#ebe6df;position:relative}
+.letter-paper{height:500px;display:flex;justify-content:center;align-items:center;overflow:hidden;padding:23px;background:#ebe6df;position:relative}
 .letter-paper img{width:100%;height:100%;object-fit:contain;display:block}
 .letter-paper img.letter-sideways{transform:rotate(90deg) scale(.76)}
-.letter-slide-caption{display:flex;align-items:baseline;justify-content:space-between;gap:18px;min-height:92px;padding:20px 24px 24px}
+.letter-slide-caption{display:flex;align-items:center;justify-content:center;min-height:67px;padding:17px 24px}
 .letter-slide-caption span{color:var(--accent);font:italic 18px Georgia,serif;white-space:nowrap}
 .letter-slide-caption h3{font:italic 400 clamp(23px,2.4vw,34px)/1.12 Georgia,'Times New Roman',serif;letter-spacing:-.035em;text-align:right;margin:0}
-.letter-controls{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:21px}
+.letter-controls{display:flex;align-items:center;justify-content:flex-end;gap:24px;padding-top:14px}
 .letter-hint{font-size:12px;letter-spacing:.035em;color:var(--muted)}
 .letter-hint-arrow{font-size:21px;color:var(--accent);vertical-align:middle;margin-right:8px}
 .letter-nav{display:flex;align-items:center;gap:9px}
@@ -249,9 +249,9 @@ button,a{-webkit-tap-highlight-color:transparent}
 .letter-nav-btn:hover:not(:disabled){background:var(--ink);color:white}
 .letter-nav-btn:disabled{opacity:.27;cursor:default}
 .letter-nav-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-@media(max-width:950px){.letter-paper{height:470px;padding:15px}.letter-slide-caption{padding:18px}}
-@media(max-width:740px){.letter-track{grid-auto-columns:min(86%,420px);gap:12px;scroll-padding-left:0}.letter-paper{height:490px;padding:15px}.letter-controls{padding-top:14px}}
-@media(max-width:480px){.letter-track{grid-auto-columns:88%}.letter-paper{height:420px;padding:11px}.letter-slide-caption{padding:15px 13px 18px;min-height:85px;gap:9px}.letter-slide-caption h3{font-size:23px}.letter-count{font-size:17px;min-width:66px;margin-right:3px}.letter-nav-btn{width:45px;height:44px}.letter-hint{font-size:11px}.letter-hint-arrow{font-size:17px;margin-right:3px}}
+@media(max-width:950px){.letter-paper{height:440px;padding:15px}.letter-slide-caption{padding:15px}}
+@media(max-width:740px){.letter-track{grid-auto-columns:100%;gap:12px;scroll-padding-left:0}.letter-paper{height:430px;padding:15px}.letter-controls{padding-top:14px}}
+@media(max-width:480px){.letter-track{grid-auto-columns:100%}.letter-paper{height:385px;padding:11px}.letter-slide-caption{padding:13px;min-height:59px}.letter-slide-caption h3{font-size:22px}.letter-count{font-size:17px;min-width:66px;margin-right:3px}.letter-nav-btn{width:45px;height:44px}.letter-hint{font-size:11px}.letter-hint-arrow{font-size:17px;margin-right:3px}}
 @media(prefers-reduced-motion:reduce){.letter-track{scroll-behavior:auto}.letter-nav-btn{transition:none}}
 </style>
 </head>
@@ -357,21 +357,21 @@ button,a{-webkit-tap-highlight-color:transparent}
 </div></section>
 <section class="testimonials" id="letters" aria-labelledby="letters-heading">
 <div class="wrap">
-<div class="section-head"><div><div class="eyebrow">Документы и доверие</div><h2 id="letters-heading">Не слова.<br><span class="orange">Благодарности.</span></h2></div><p>Настоящие письма от организаций, с которыми мы работали. Листайте галерею, чтобы посмотреть документы.</p></div>
+<div class="section-head"><div><div class="eyebrow">Документы и доверие</div><h2 id="letters-heading">Отзывы <span class="orange">и благодарности.</span></h2></div></div>
 <div class="letter-carousel" id="letterCarousel" role="region" aria-roledescription="карусель" aria-label="Благодарственные письма">
 <div class="letter-track" id="letterTrack" tabindex="0" aria-label="Галерея писем: листайте вправо и влево">
-<article class="letter-slide" aria-label="Документ 1 из 9: Мэрия Казани"><div class="letter-paper"><img src="assets/letters/photo_7_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Мэрия Казани" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>01&nbsp; / &nbsp;09</span><h3>Мэрия Казани</h3></div></article>
-<article class="letter-slide" aria-label="Документ 2 из 9: Федерация профсоюзов Республики Татарстан"><div class="letter-paper"><img src="assets/letters/photo_2_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Федерация профсоюзов Республики Татарстан" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><span>02&nbsp; / &nbsp;09</span><h3>Федерация профсоюзов Республики Татарстан</h3></div></article>
-<article class="letter-slide" aria-label="Документ 3 из 9: БФ «Будущее поколение»"><div class="letter-paper"><img src="assets/letters/photo_9_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: БФ «Будущее поколение»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>03&nbsp; / &nbsp;09</span><h3>БФ «Будущее поколение»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 4 из 9: ООО «НурГаз»"><div class="letter-paper"><img src="assets/letters/photo_6_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: ООО «НурГаз»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>04&nbsp; / &nbsp;09</span><h3>ООО «НурГаз»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 5 из 9: Фонд «Ярдам-Помощь»"><div class="letter-paper"><img src="assets/letters/photo_1_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Фонд «Ярдам-Помощь»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>05&nbsp; / &nbsp;09</span><h3>Фонд «Ярдам-Помощь»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 6 из 9: АНО «Всё для детей»"><div class="letter-paper"><img src="assets/letters/photo_8_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: АНО «Всё для детей»" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><span>06&nbsp; / &nbsp;09</span><h3>АНО «Всё для детей»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 7 из 9: Банный комплекс «Бани у Дани»"><div class="letter-paper"><img src="assets/letters/photo_10_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Банный комплекс «Бани у Дани»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>07&nbsp; / &nbsp;09</span><h3>Банный комплекс «Бани у Дани»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 8 из 9: УДЦ «Партнёр»"><div class="letter-paper"><img src="assets/letters/photo_5_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: УДЦ «Партнёр»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>08&nbsp; / &nbsp;09</span><h3>УДЦ «Партнёр»</h3></div></article>
-<article class="letter-slide" aria-label="Документ 9 из 9: «Эрудит-Селдом»"><div class="letter-paper"><img src="assets/letters/photo_4_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: «Эрудит-Селдом»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><span>09&nbsp; / &nbsp;09</span><h3>«Эрудит-Селдом»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 1 из 9: Мэрия Казани"><div class="letter-paper"><img src="assets/letters/photo_7_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Мэрия Казани" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Мэрия Казани</h3></div></article>
+<article class="letter-slide" aria-label="Документ 2 из 9: Федерация профсоюзов Республики Татарстан"><div class="letter-paper"><img src="assets/letters/photo_2_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Федерация профсоюзов Республики Татарстан" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>Федерация профсоюзов Республики Татарстан</h3></div></article>
+<article class="letter-slide" aria-label="Документ 3 из 9: БФ «Будущее поколение»"><div class="letter-paper"><img src="assets/letters/photo_9_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: БФ «Будущее поколение»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>БФ «Будущее поколение»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 4 из 9: ООО «НурГаз»"><div class="letter-paper"><img src="assets/letters/photo_6_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: ООО «НурГаз»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>ООО «НурГаз»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 5 из 9: Фонд «Ярдам-Помощь»"><div class="letter-paper"><img src="assets/letters/photo_1_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Фонд «Ярдам-Помощь»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Фонд «Ярдам-Помощь»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 6 из 9: АНО «Всё для детей»"><div class="letter-paper"><img src="assets/letters/photo_8_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: АНО «Всё для детей»" loading="lazy" decoding="async" class="letter-sideways"></div><div class="letter-slide-caption"><h3>АНО «Всё для детей»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 7 из 9: Банный комплекс «Бани у Дани»"><div class="letter-paper"><img src="assets/letters/photo_10_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: Банный комплекс «Бани у Дани»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>Банный комплекс «Бани у Дани»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 8 из 9: УДЦ «Партнёр»"><div class="letter-paper"><img src="assets/letters/photo_5_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: УДЦ «Партнёр»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>УДЦ «Партнёр»</h3></div></article>
+<article class="letter-slide" aria-label="Документ 9 из 9: «Эрудит-Селдом»"><div class="letter-paper"><img src="assets/letters/photo_4_2026-10-19_15-38-13.jpg" alt="Благодарственное письмо: «Эрудит-Селдом»" loading="lazy" decoding="async"></div><div class="letter-slide-caption"><h3>«Эрудит-Селдом»</h3></div></article>
 </div>
 <div class="letter-controls">
-<div class="letter-hint"><span class="letter-hint-arrow" aria-hidden="true">↔</span> Листайте фотографии писем</div>
+
 <div class="letter-nav"><span class="letter-count" id="letterCount" aria-live="off">01 / 09</span><button class="letter-nav-btn" id="letterPrev" type="button" aria-label="Предыдущее письмо" disabled>←</button><button class="letter-nav-btn" id="letterNext" type="button" aria-label="Следующее письмо">→</button></div>
 </div>
 </div>
@@ -489,6 +489,8 @@ const prev=document.getElementById("letterPrev");
 const next=document.getElementById("letterNext");
 const counter=document.getElementById("letterCount");
 const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+const desktop=window.matchMedia("(min-width: 741px) and (prefers-reduced-motion: no-preference)");
+let paused=false,hovered=false,focused=false;
 function closestSlide(){
 let best=0,dist=Infinity;
 for(let i=0;i<slides.length;i++){
@@ -504,8 +506,11 @@ counter.textContent=(end?String(slides.length).padStart(2,"0"):String(i+1).padSt
 prev.disabled=track.scrollLeft<=3;
 next.disabled=end;
 }
-function go(dir){
-const i=Math.max(0,Math.min(slides.length-1,closestSlide()+dir));
+function go(dir,fromUser=true){
+if(fromUser)paused=true;
+let i=closestSlide()+dir;
+if(i>=slides.length)i=0;
+if(i<0)i=slides.length-1;
 track.scrollTo({left:slides[i].offsetLeft-slides[0].offsetLeft,behavior:reduced.matches?"instant":"smooth"});
 counter.textContent=String(i+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
 prev.disabled=i===0;
@@ -513,10 +518,16 @@ next.disabled=false;
 }
 prev.addEventListener("click",()=>go(-1));
 next.addEventListener("click",()=>go(1));
+track.addEventListener("mouseenter",()=>hovered=true);
+track.addEventListener("mouseleave",()=>hovered=false);
+track.addEventListener("focusin",()=>focused=true);
+track.addEventListener("focusout",()=>setTimeout(()=>focused=track.contains(document.activeElement),0));
+track.addEventListener("touchstart",()=>paused=true,{passive:true});
 track.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(1)}else if(e.key==="ArrowLeft"){e.preventDefault();go(-1)}});
 let raf=0;
 track.addEventListener("scroll",()=>{if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{raf=0;refresh()})},{passive:true});
 window.addEventListener("resize",refresh);
+setInterval(()=>{if(desktop.matches&&!paused&&!hovered&&!focused&&!document.hidden)go(1,false)},7000);
 refresh();
 })();
 </script></body>
