@@ -372,7 +372,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 </div>
 <div class="letter-controls">
 
-<div class="letter-nav"><span class="letter-count" id="letterCount" aria-live="off">01 / 09</span><button class="letter-nav-btn" id="letterPrev" type="button" aria-label="Предыдущее письмо" disabled>←</button><button class="letter-nav-btn" id="letterNext" type="button" aria-label="Следующее письмо">→</button></div>
+<div class="letter-nav"><span class="letter-count" id="letterCount" aria-live="off">01 / 09</span><button class="letter-nav-btn" id="letterPrev" type="button" aria-label="Предыдущее письмо">←</button><button class="letter-nav-btn" id="letterNext" type="button" aria-label="Следующее письмо">→</button></div>
 </div>
 </div>
 </div>
@@ -503,8 +503,8 @@ function refresh(){
 const i=closestSlide();
 const end=track.scrollLeft>=track.scrollWidth-track.clientWidth-3;
 counter.textContent=(end?String(slides.length).padStart(2,"0"):String(i+1).padStart(2,"0"))+" / "+String(slides.length).padStart(2,"0");
-prev.disabled=track.scrollLeft<=3;
-next.disabled=end;
+prev.disabled=false;
+next.disabled=false;
 }
 function go(dir,fromUser=true){
 if(fromUser)paused=true;
@@ -513,7 +513,7 @@ if(i>=slides.length)i=0;
 if(i<0)i=slides.length-1;
 track.scrollTo({left:slides[i].offsetLeft-slides[0].offsetLeft,behavior:reduced.matches?"instant":"smooth"});
 counter.textContent=String(i+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
-prev.disabled=i===0;
+prev.disabled=false;
 next.disabled=false;
 }
 prev.addEventListener("click",()=>go(-1));
