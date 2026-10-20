@@ -361,7 +361,10 @@ if(busy||target===index)return;
 busy=true;
 const item=slides[target];
 const preloader=new Image();
+let applied=false;
 const apply=function(){
+if(applied)return;
+applied=true;
 img.classList.add("is-changing");
 window.setTimeout(function(){
 img.src=item.src;
@@ -387,7 +390,7 @@ if(preloader.complete&&preloader.naturalWidth)apply();
 function setAuto(){
 if(timer)window.clearInterval(timer);
 timer=window.setInterval(function(){
-if(playing&&desktopMotion.matches&&!hover&&!focusWithin&&!document.hidden)show(index+1,false);
+if(playing&&!hover&&(!focusWithin||document.activeElement===pauseBtn)&&!document.hidden)show(index+1,false);
 },7000);
 }
 document.getElementById("heroPrev").addEventListener("click",()=>show(index-1,true));
@@ -412,7 +415,7 @@ touchStart=null;
 if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5){lastSwipe=Date.now();show(index+(dx<0?1:-1),true)}
 },{passive:true});
 link.addEventListener("click",function(e){if(Date.now()-lastSwipe<550)e.preventDefault()});
-if(desktopMotion.addEventListener)desktopMotion.addEventListener("change",function(e){if(!e.matches){playing=false;updateToggle()}});
+if(desktopMotion.addEventListener)desktopMotion.addEventListener("change",function(e){if(!e.matches&&playing){playing=false;updateToggle()}});
 updateToggle();
 setAuto();
 })();
