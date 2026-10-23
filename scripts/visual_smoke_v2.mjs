@@ -29,7 +29,7 @@ for(const v of views){
     const broken=[...document.images].filter(i=>i.getAttribute('src')&&i.getBoundingClientRect().width>0&&i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src'));
     const h1=document.querySelectorAll('h1').length;
     const missingLabels=[...document.querySelectorAll('a')].filter(a=>!a.textContent.trim()&&!a.getAttribute('aria-label')&&!a.querySelector('img[alt]')).length;
-    const oversized=[...document.querySelectorAll('*')].filter(x=>{const r=x.getBoundingClientRect();return r.width>10&&r.right>window.innerWidth+4&&getComputedStyle(x).position!=='fixed'}).slice(0,8).map(x=>x.tagName.toLowerCase()+'.'+String(x.className).slice(0,45));
+    const oversized=[...document.querySelectorAll('*')].filter(x=>{const r=x.getBoundingClientRect();return r.width>10&&r.right>window.innerWidth+4&&getComputedStyle(x).position!=='fixed'}).slice(0,18).map(x=>{const r=x.getBoundingClientRect();return x.tagName.toLowerCase()+'.'+String(x.className?.baseVal||x.className||'').slice(0,45)+' ['+Math.round(r.left)+'..'+Math.round(r.right)+'] section='+String(x.closest('section')?.className||'')+' text='+x.textContent.trim().slice(0,55).replaceAll('\n',' ')});
     return {overflow,broken,h1,main:!!document.querySelector('main'),missingLabels,oversized};
   });
   if(shots.has(pageFile)&&v.name!=='small-mobile')await page.screenshot({path:'artifacts/bis-v2-review/'+pageFile.replace('.html','')+'-'+v.name+'.jpg',type:'jpeg',quality:77,fullPage:true,animations:'disabled'});
