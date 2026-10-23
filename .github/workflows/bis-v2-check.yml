@@ -22,3 +22,4 @@ jobs:
           python3 .github/scripts/check_wordstat_import_v2.py
           python3 .github/scripts/check_technical_seo_v2.py
           python3 .github/scripts/check_keyword_pilot_v2.py
+          python3 .github/scripts/check_content_v2.py
