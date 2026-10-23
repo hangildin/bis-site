@@ -18,3 +18,4 @@ jobs:
           python3 .github/scripts/check_portfolio_v2.py
           python3 .github/scripts/check_seo_v2.py
           python3 .github/scripts/wordstat_collect.py
+          python3 .github/scripts/check_market_v2.py
