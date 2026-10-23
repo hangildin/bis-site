@@ -28,7 +28,7 @@ class Reader(HTMLParser):
         if tag=="meta" and a.get("name")=="robots":self.robots.append(a.get("content",""))
 p=Reader();p.feed(home)
 if p.h1!=1: errors.append("Expected one H1")
-if p.cards!=4: errors.append("Expected four commercial service cards")
+if p.cards!=5: errors.append("Expected five commercial service cards")
 if "services" not in p.ids or "contacts" not in p.ids: errors.append("Broken services / contacts sections")
 if not any("noindex" in x for x in p.robots):errors.append("Preview must remain noindex until release")
 if '<a href="services.html">Услуги</a>' not in home:errors.append("No services in main navigation")
@@ -44,6 +44,7 @@ for f,case in services.items():
     if case.lower() not in home.lower():errors.append("Missing case proof "+case)
     if not (ROOT/f).is_file():errors.append("Missing page "+f)
 if "services.html" not in p.anchors:errors.append("Missing catalog route")
+if "children-events.html" not in p.anchors:errors.append("Children events route missing")
 for image in p.images:
     if image.get("src","").startswith("assets/"):
         target=ROOT/image["src"]
