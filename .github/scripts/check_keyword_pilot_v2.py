@@ -11,7 +11,15 @@ with EVIDENCE.open(encoding="utf-8-sig",newline="") as f:e=list(csv.DictReader(f
 with CURATED.open(encoding="utf-8-sig",newline="") as f:c=list(csv.DictReader(f,delimiter=";"))
 assert len(p)==len(e)==24, f"Expected 24 monitoring rows, got {len(p)}/{len(e)}"
 assert len({v["name"] for v in p})==24, "Duplicate pilot queries"
+source=ROOT/".github/seo/wordstat_confirmed_18.csv"
+with source.open(encoding="utf-8-sig",newline="") as f:
+    confirmed=list(csv.DictReader(f,delimiter=";"))
+assert len(confirmed)==18, "Expected 18 original Wordstat source records"
+original={r["Фраза"]:str(r["Число запросов"]) for r in confirmed}
 old={r["Фраза из Wordstat"]:r["Запросы за период"] for r in c}
+for phrase,value in original.items():
+    if phrase in old:
+        assert value==old[phrase],f"Conflicting Wordstat sources for {phrase}"
 ev={r["Фраза"]:r for r in e}
 measured=hypotheses=0
 for row in p:
@@ -21,7 +29,7 @@ for row in p:
  raw=record["Показы Wordstat за 22.09–22.10.2026 (все регионы)"]
  if raw:
   measured+=1
-  assert raw==old.get(phrase),f"Evidence mismatch for {phrase}: {raw} != {old.get(phrase)}"
+  assert raw==original.get(phrase),f"Original CSV evidence mismatch for {phrase}: {raw} != {original.get(phrase)}"
   assert "Все регионы" in record["Тип данных"] or "все регионы" in record["Тип данных"].lower(),phrase
  else:
   hypotheses+=1
