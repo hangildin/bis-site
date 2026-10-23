@@ -3,7 +3,7 @@
 import csv, json, re, subprocess, sys, tempfile
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit,unquote
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -48,7 +48,7 @@ with tempfile.TemporaryDirectory() as temp:
    parsed=urlsplit(link)
    if parsed.scheme in ("https","http","mailto","tel") or link.startswith("#"):continue
    check(not parsed.netloc and parsed.path,f"Unexpected local link: {link} at {name}")
-   check((output/parsed.path).is_file(),f"Broken internal link: {link} from {name}")
+   check((output/unquote(parsed.path)).is_file(),f"Broken internal link: {link} from {name}")
   if name.startswith("journal-"):
    matched=re.findall(r'<script type="application/ld\+json">(.*?)</script>',src,re.S)
    check(len(matched)==1,"Article structured data missing on "+name)
