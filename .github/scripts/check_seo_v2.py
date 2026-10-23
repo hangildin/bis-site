@@ -29,6 +29,9 @@ for name in PAGES:
   issues.append(f"{name}: missing case/contact navigation")
  if src.count('id="bis-seo-guide-heading"')!=1:issues.append(f"{name}: duplicate guide heading")
  if src.count("<meta name=\"description\"")!=1:issues.append(f"{name}: meta description count")
+corporate=(ROOT/"corporate-events.html").read_text(encoding="utf-8")
+if 'id="new-year-corporate"' not in corporate or 'Организация новогоднего' not in corporate:
+ issues.append("Seasonal corporate coverage absent despite measured queries")
 css=(ROOT/"assets/bis-services.css").read_text(encoding="utf-8")
 if ".bis-seo-questions" not in css or "max-width:760px" not in css:
  issues.append("Missing responsive stylesheet for editorial content")
