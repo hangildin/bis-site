@@ -33,7 +33,7 @@ check("api.wordstat.yandex.net/v1" not in collector,"Obsolete Wordstat v1 collec
 check("if not args.execute:" in collector,"Cost-guarding dry-run required")
 check("--execute" in collector,"Manual enable flag missing")
 report=(ROOT/".github/seo/BIS_05_MARKET_RESEARCH.md").read_text(encoding="utf-8")
-check("не рейтинг" in report.lower(),"Research disclaimer missing")
+check("рейтинг позиций" in report.lower() and "не** рейтинг" in report.lower(),"Research disclaimer missing")
 if err:
     for e in err:print("ERROR:",e)
     raise SystemExit(1)
