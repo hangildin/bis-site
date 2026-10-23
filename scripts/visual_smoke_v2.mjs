@@ -15,11 +15,18 @@ for(const v of views){
   page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)failed.push(String(r.status())+' '+r.url().replace(base,''))});
   await page.goto(base+'/'+pageFile,{waitUntil:'load',timeout:20000});
   await page.evaluate(async()=>{const step=Math.max(500,Math.floor(window.innerHeight*.75));for(let top=0;top<document.documentElement.scrollHeight;top+=step){window.scrollTo(0,top);await new Promise(r=>setTimeout(r,15));}window.scrollTo(0,0)});
-  await page.waitForTimeout(150);
+  // Lazy images become visible over long pages; decode them rather than flagging pending loads.
+  await page.evaluate(async()=>{
+    const imgs=[...document.images];
+    await Promise.race([
+      Promise.all(imgs.map(img=>{img.loading='eager';return img.decode?.().catch(()=>{})})),
+      new Promise(resolve=>setTimeout(resolve,12000))
+    ]);
+  });
   const audit=await page.evaluate(()=>{
     const doc=document.documentElement,body=document.body;
     const overflow=Math.max(doc.scrollWidth,body.scrollWidth)-window.innerWidth;
-    const broken=[...document.images].filter(i=>i.getAttribute('src')&&i.getBoundingClientRect().width>0&&(!i.complete||i.naturalWidth===0)).map(i=>i.getAttribute('src'));
+    const broken=[...document.images].filter(i=>i.getAttribute('src')&&i.getBoundingClientRect().width>0&&i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src'));
     const h1=document.querySelectorAll('h1').length;
     const missingLabels=[...document.querySelectorAll('a')].filter(a=>!a.textContent.trim()&&!a.getAttribute('aria-label')&&!a.querySelector('img[alt]')).length;
     const oversized=[...document.querySelectorAll('*')].filter(x=>{const r=x.getBoundingClientRect();return r.width>10&&r.right>window.innerWidth+4&&getComputedStyle(x).position!=='fixed'}).slice(0,8).map(x=>x.tagName.toLowerCase()+'.'+String(x.className).slice(0,45));
