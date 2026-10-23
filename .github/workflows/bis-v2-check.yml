@@ -16,3 +16,4 @@ jobs:
         run: |
           python3 .github/scripts/check_bis_v2.py
           python3 .github/scripts/check_portfolio_v2.py
+          python3 .github/scripts/check_seo_v2.py
