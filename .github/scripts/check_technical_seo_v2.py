@@ -9,7 +9,10 @@ BASE="https://hangildin.github.io/bis-site/"
 PAGES=["index.html","services.html","corporate-events.html","city-events.html",
 "brand-events.html","sports-events.html","children-events.html","projects.html","zelenodolsk.html",
 "himfest.html","kastamonu.html","spartakiada.html","festival-dobryh-del.html",
-"phuket-wedding.html","plehanov-reu.html","letters.html"]
+"phuket-wedding.html","plehanov-reu.html","letters.html","journal.html",
+"journal-corporate-brief.html","journal-new-year-corporate.html","journal-children-birthday.html",
+"journal-kids-festival-zone.html","journal-city-festival.html","journal-brand-launch.html",
+"journal-company-spartakiad.html","journal-event-budget.html"]
 issues=[]
 class Inspect(HTMLParser):
  def __init__(self):
@@ -39,7 +42,8 @@ for name in PAGES:
  url=BASE+("" if name=="index.html" else name)
  if p.canonical!=[url]:issues.append(f"{name}: canonical mismatch")
  if p.og.get("og:url")!=url:issues.append(f"{name}: og:url mismatch")
- if p.og.get("og:type")!="website":issues.append(f"{name}: og:type missing")
+ if p.og.get("og:type")!=("article" if name.startswith("journal-") else "website"):
+  issues.append(f"{name}: og:type invalid")
  for tag in ("og:title","og:description","og:image"):
   if not p.og.get(tag):issues.append(f"{name}: missing {tag}")
  if p.titles!=1 or p.h1!=1:issues.append(f"{name}: one title/H1 required")
@@ -61,4 +65,4 @@ for name in PAGES:
    issues.append(f"{name}: missing image {target}")
 for problem in issues:print("ERROR:",problem)
 if issues:raise SystemExit(1)
-print("BIS V2 TECH SEO PASS: exactly 16 real pages, canonical, OG and sitemap consistent; staging noindex enforced.")
+print("BIS V2 TECH SEO PASS: exactly 25 real pages, canonical, OG and sitemap consistent; staging noindex enforced.")
