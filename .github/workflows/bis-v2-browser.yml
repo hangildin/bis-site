@@ -44,7 +44,13 @@ jobs:
           git add preview/bis-v2
           if ! git diff --cached --quiet; then
             git commit -m "BIS V2: refresh visual browser review screenshots"
-            git push origin HEAD:bis-v2-development
+            for attempt in 1 2 3; do
+              git fetch origin bis-v2-development
+              git rebase origin/bis-v2-development
+              if git push origin HEAD:bis-v2-development; then exit 0; fi
+              sleep 2
+            done
+            exit 1
           fi
       - name: Upload preview and audit
         if: always()
