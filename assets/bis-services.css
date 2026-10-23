@@ -119,3 +119,15 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .bis-seo-guide-links a{border-bottom:1px solid var(--ink);padding-bottom:8px;font-size:11px;letter-spacing:.06em;font-weight:800;text-transform:uppercase}
 .bis-seo-guide-links a:hover{color:var(--accent);border-color:var(--accent)}
 @media(max-width:760px){.bis-seo-guide{padding:65px 0}.bis-seo-questions{grid-template-columns:1fr}.bis-seo-question{padding:25px 0}.bis-seo-question h3{font-size:29px}.bis-seo-guide .section-head h2{font-size:clamp(40px,8vw,57px)}}
+
+
+/* BIS V2: measured corporate intent, without claiming a non-existent New Year case. */
+.bis-seasonal{background:#eee8e0;padding:93px 0;color:var(--ink)}
+.bis-seasonal-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.bis-seasonal h2{font:italic 400 clamp(43px,5vw,73px)/1.02 Georgia,'Times New Roman',serif;letter-spacing:-.055em;margin:20px 0 0}
+.bis-seasonal h2 em{color:var(--accent)}
+.bis-seasonal-grid p{font-size:16px;line-height:1.67;color:#635a52;margin:0 0 19px}
+.bis-seasonal-grid .bis-seasonal-lead{font-size:20px;line-height:1.45;color:var(--ink)}
+.bis-seasonal-grid .bis-seasonal-note{font-size:13px;color:#756a60}
+.bis-seasonal .button{margin-top:13px}
+@media(max-width:760px){.bis-seasonal{padding:65px 0}.bis-seasonal-grid{grid-template-columns:1fr;gap:25px}.bis-seasonal h2{font-size:clamp(43px,8vw,64px)}}
