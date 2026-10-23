@@ -1,9 +1,9 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 const base='http://127.0.0.1:8765';
-const pages=['index.html','services.html','corporate-events.html','city-events.html','brand-events.html','sports-events.html','children-events.html','projects.html','himfest.html','zelenodolsk.html','kastamonu.html','spartakiada.html','festival-dobryh-del.html','phuket-wedding.html','plehanov-reu.html','letters.html'];
+const pages=['index.html','services.html','corporate-events.html','city-events.html','brand-events.html','sports-events.html','children-events.html','projects.html','himfest.html','zelenodolsk.html','kastamonu.html','spartakiada.html','festival-dobryh-del.html','phuket-wedding.html','plehanov-reu.html','letters.html','journal.html','journal-corporate-brief.html','journal-new-year-corporate.html','journal-children-birthday.html','journal-kids-festival-zone.html','journal-city-festival.html','journal-brand-launch.html','journal-company-spartakiad.html','journal-event-budget.html'];
 const views=[{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'small-mobile',width:320,height:700}];
-const shots=new Set(['index.html','services.html','children-events.html','corporate-events.html','projects.html']);
+const shots=new Set(['index.html','services.html','children-events.html','corporate-events.html','projects.html','journal.html','journal-children-birthday.html','journal-corporate-brief.html']);
 const result=[];
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
 fs.mkdirSync('artifacts/bis-v2-review',{recursive:true});
