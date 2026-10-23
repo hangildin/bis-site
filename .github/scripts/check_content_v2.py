@@ -27,8 +27,9 @@ check("В портфолио Бис*" in CHILD,"Children FAQ should explain veri
 for item in ['href="tel:+79631223399"','href="mailto:bis.manager@vk.com"','href="https://t.me/+7z9ehE-JLUs0ZjNi"']:
     check(item in HOME,"User-confirmed contact unexpectedly changed "+item)
 check("300 гостей" not in HOME and "300 гостей" not in (ROOT/"projects.html").read_text(encoding="utf-8"),"Disputed guest count returned")
-check((ROOT/"sitemap.xml").read_text(encoding="utf-8").count("<loc>")==16,"Sitemap must contain 16 pages")
+check((ROOT/"sitemap.xml").read_text(encoding="utf-8").count("<loc>")==25,"Sitemap must contain 25 pages")
 if problems:
     for p in problems:print("ERROR:",p)
     raise SystemExit(1)
-print("BIS V2 CONTENT PASS: 5 service routes, related children proof, claims, contacts, 16-page sitemap.")
+check("journal.html" in HOME and "journal.html" in CAT,"Journal missing from primary site navigation")
+print("BIS V2 CONTENT PASS: 5 services, 8 articles, relevant case links, claims, contacts, 25-page sitemap.")
