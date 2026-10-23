@@ -32,7 +32,7 @@ for(const v of views){
     const oversized=[...document.querySelectorAll('*')].filter(x=>{const r=x.getBoundingClientRect();return r.width>10&&r.right>window.innerWidth+4&&getComputedStyle(x).position!=='fixed'}).slice(0,8).map(x=>x.tagName.toLowerCase()+'.'+String(x.className).slice(0,45));
     return {overflow,broken,h1,main:!!document.querySelector('main'),missingLabels,oversized};
   });
-  if(shots.has(pageFile)&&v.name!=='small-mobile')await page.screenshot({path:'artifacts/bis-v2-review/'+pageFile.replace('.html','')+'-'+v.name+'.png',fullPage:true,animations:'disabled'});
+  if(shots.has(pageFile)&&v.name!=='small-mobile')await page.screenshot({path:'artifacts/bis-v2-review/'+pageFile.replace('.html','')+'-'+v.name+'.jpg',type:'jpeg',quality:77,fullPage:true,animations:'disabled'});
   result.push({page:pageFile,viewport:v.name,...audit,errors,failed});
   await page.close();
  }
