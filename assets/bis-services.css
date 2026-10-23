@@ -44,7 +44,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .media-caption span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.18em;font-weight:800;margin-bottom:12px}
 .media-caption strong{font-size:15px;line-height:1.4}
 .directory{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.directory .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.directory .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
 .directory a{padding:23px 18px;border-right:1px solid var(--border);font-size:12px;letter-spacing:.03em;font-weight:800;line-height:1.45}
 .directory a:first-child{border-left:1px solid var(--border)}
 .directory a:hover,.directory a[aria-current="page"]{color:var(--accent);background:#f0ebe4}
@@ -54,7 +54,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .section-head h2{font:italic 400 clamp(43px,5.2vw,70px)/1.04 Georgia,serif;letter-spacing:-.06em;margin:16px 0 0}
 .section-head h2 em{color:var(--accent)}
 .section-head p{font-size:16px;line-height:1.55;color:var(--muted);max-width:460px;margin:0}
-.services-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:64px 28px}
+.services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:45px 24px}
 .service-card{display:block;min-width:0}
 .service-photo{height:340px;position:relative;overflow:hidden;background:#dbd3c7}
 .service-photo img{height:100%;object-fit:cover;transition:transform .5s}
@@ -131,3 +131,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .bis-seasonal-grid .bis-seasonal-note{font-size:13px;color:#756a60}
 .bis-seasonal .button{margin-top:13px}
 @media(max-width:760px){.bis-seasonal{padding:65px 0}.bis-seasonal-grid{grid-template-columns:1fr;gap:25px}.bis-seasonal h2{font-size:clamp(43px,8vw,64px)}}
+
+/* BIS V2 five service directions including children's events */
+@media(max-width:1100px){.directory .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.directory .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.services-grid{grid-template-columns:1fr}}
