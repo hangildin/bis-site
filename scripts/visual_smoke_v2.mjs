@@ -2,7 +2,7 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 const base='http://127.0.0.1:8765';
 const pages=['index.html','services.html','corporate-events.html','city-events.html','brand-events.html','sports-events.html','children-events.html','projects.html','himfest.html','zelenodolsk.html','kastamonu.html','spartakiada.html','festival-dobryh-del.html','phuket-wedding.html','plehanov-reu.html','letters.html','journal.html','journal-corporate-brief.html','journal-new-year-corporate.html','journal-children-birthday.html','journal-kids-festival-zone.html','journal-city-festival.html','journal-brand-launch.html','journal-company-spartakiad.html','journal-event-budget.html'];
-const views=[{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'small-mobile',width:320,height:700}];
+const views=[{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'tablet',width:768,height:1024},{name:'small-desktop',width:1024,height:768},{name:'small-mobile',width:320,height:700}];
 const shots=new Set(['index.html','services.html','children-events.html','corporate-events.html','projects.html','journal.html','journal-children-birthday.html','journal-corporate-brief.html']);
 const result=[];
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
@@ -41,7 +41,7 @@ for(const v of views){
 await browser.close();
 const critical=result.filter(x=>x.overflow>4||x.broken.length||x.failed.length||x.errors.length||x.h1!==1||!x.main);
 fs.writeFileSync('artifacts/bis-v2-review/report.json',JSON.stringify({run:new Date().toISOString(),result,critical},null,2));
-const md=['# BIS V2 — Browser & Visual QA','','Checked **'+pages.length+' pages** in **'+views.length+' viewports**.','','| Page | Desktop | Mobile 390px | Small 320px |','|---|---|---|---|',...pages.map(name=>'| '+name+' | '+views.map(v=>{const x=result.find(x=>x.page===name&&x.viewport===v.name);return x.overflow>4||x.broken.length||x.failed.length||x.errors.length||x.h1!==1||!x.main?'❌':'✅'}).join(' | ')+' |'),'', '**Errors:** '+critical.length,...critical.slice(0,40).map(x=>'- '+x.page+' / '+x.viewport+': overflow '+x.overflow+'px, images '+x.broken.join(', ')+' HTTP '+x.failed.join(', ')+' JS '+x.errors.join('; ')+' H1 '+x.h1+' extras '+x.oversized.join(', ')), '', 'The GitHub Actions artifact bis-v2-review contains full-page screenshots. This workflow does not deploy or edit main.'].join('\n');
+const md=['# BIS V2 — Browser & Visual QA','','Checked **'+pages.length+' pages** in **'+views.length+' viewports**.','','| Page | Desktop | Mobile 390px | Tablet 768px | Laptop 1024px | Small 320px |','|---|---|---|---|---|',...pages.map(name=>'| '+name+' | '+views.map(v=>{const x=result.find(x=>x.page===name&&x.viewport===v.name);return x.overflow>4||x.broken.length||x.failed.length||x.errors.length||x.h1!==1||!x.main?'❌':'✅'}).join(' | ')+' |'),'', '**Errors:** '+critical.length,...critical.slice(0,40).map(x=>'- '+x.page+' / '+x.viewport+': overflow '+x.overflow+'px, images '+x.broken.join(', ')+' HTTP '+x.failed.join(', ')+' JS '+x.errors.join('; ')+' H1 '+x.h1+' extras '+x.oversized.join(', ')), '', 'The GitHub Actions artifact bis-v2-review contains full-page screenshots. This workflow does not deploy or edit main.'].join('\n');
 if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,md+'\n');
 console.log(md);
 if(critical.length)process.exitCode=1;
