@@ -1,0 +1,39 @@
+name: BIS V2 commercial site deployment
+on:
+  workflow_dispatch:
+  push:
+    branches: [bis-v2-development]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'scripts/build_release.py'
+      - 'scripts/check_release.py'
+      - '.github/workflows/bis-v2-deploy-separate.yml'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: bis-commercial-v2-pages
+  cancel-in-progress: false
+jobs:
+  deploy-separate:
+    # GUARANTEE: never deploy to the owner's approved bis-site Pages project.
+    if: github.repository == 'hangildin/bis-site-v2'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build isolated public release and check all 25 pages
+        run: |
+          python3 scripts/check_release.py
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site-v2/ --publish --out dist
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+      - name: Deploy only in the separate repository
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,19 @@
+/* BIS V2: case-to-service navigation, using the existing BIS palette/typography. */
+.case-listing{min-width:0;display:flex;flex-direction:column}
+.case-listing .card{flex:1}
+.case-service-link{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 6px 16px;border-top:1px solid var(--line,#ded8d0);color:var(--ink,#211f1d);font-size:12px;font-weight:700;line-height:1.45;letter-spacing:.025em}
+.case-service-link .case-link-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#787068;font-weight:700;display:block;margin-bottom:5px}
+.case-service-link .case-link-name{font:italic 400 22px/1.1 Georgia,'Times New Roman',serif}
+.case-service-link .case-link-arrow{color:var(--orange,#d7552d);font-size:19px}
+.case-service-link:hover .case-link-name{color:var(--orange,#d7552d)}
+.case-service-link:focus-visible,.bis-v2-case-nav a:focus-visible{outline:3px solid var(--orange,#d7552d);outline-offset:3px}
+.bis-v2-case-nav{background:var(--bg,var(--cream,#f8f5f0));color:var(--ink,#211f1d);border-block:1px solid var(--line,#ded8d0);margin:25px 0 35px}
+.bis-v2-case-nav-inner{width:min(1160px,90%);margin:0 auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:17px}
+.bis-v2-case-nav-intro{display:flex;flex-direction:column;gap:7px}
+.bis-v2-case-nav-intro span{color:var(--orange,#d7552d);font-size:10px;text-transform:uppercase;letter-spacing:.14em;font-weight:800}
+.bis-v2-case-nav-intro strong{font:italic 400 26px/1.15 Georgia,'Times New Roman',serif;letter-spacing:-.02em}
+.bis-v2-case-nav-links{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.bis-v2-case-nav-links a{border-bottom:1px solid currentColor;padding-bottom:6px;font-size:12px;font-weight:800;line-height:1.45;text-transform:uppercase;letter-spacing:.04em}
+.bis-v2-case-nav-links a:hover{color:var(--orange,#d7552d)}
+@media(max-width:720px){.bis-v2-case-nav-inner{flex-direction:column;align-items:flex-start}.bis-v2-case-nav-links{gap:12px 20px}.case-service-link{padding-block:15px}}
+@media(prefers-reduced-motion:reduce){.case-listing .card{transition:none}}

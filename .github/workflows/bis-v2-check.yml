@@ -1,0 +1,27 @@
+name: BIS v2 staging quality
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [bis-v2-development]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate staging homepage
+        run: |
+          python3 .github/scripts/check_bis_v2.py
+          python3 .github/scripts/check_portfolio_v2.py
+          python3 .github/scripts/check_seo_v2.py
+          python3 .github/scripts/wordstat_collect.py
+          python3 .github/scripts/check_market_v2.py
+          python3 .github/scripts/check_wordstat_import_v2.py
+          python3 .github/scripts/check_technical_seo_v2.py
+          python3 .github/scripts/check_keyword_pilot_v2.py
+          python3 .github/scripts/check_content_v2.py
+          python3 .github/scripts/check_journal_v2.py
+          python3 scripts/check_release.py

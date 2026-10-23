@@ -1,0 +1,60 @@
+name: BIS v2 browser review
+on:
+  push:
+    branches: [bis-v2-development]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'scripts/visual_smoke_v2.mjs'
+      - '.github/workflows/bis-v2-browser.yml'
+  workflow_dispatch:
+concurrency:
+  group: bis-v2-browser-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  browser-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.58.2
+          command -v google-chrome
+          google-chrome --version
+      - name: Start local site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/bis-v2-server.log 2>&1 &
+          for i in {1..30}; do curl --silent --fail http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Screenshot and audit 25 pages
+        run: node scripts/visual_smoke_v2.mjs
+      - name: Commit screenshot gallery to V2 branch only
+        if: success() && github.ref == 'refs/heads/bis-v2-development'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin bis-v2-development
+            git reset --hard origin/bis-v2-development
+            mkdir -p preview/bis-v2
+            cp artifacts/bis-v2-review/*.jpg preview/bis-v2/
+            git add preview/bis-v2
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "BIS V2: refresh visual browser review screenshots"
+            if git push origin HEAD:bis-v2-development; then exit 0; fi
+          done
+          exit 1
+      - name: Upload preview and audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bis-v2-review
+          path: artifacts/bis-v2-review
+          if-no-files-found: warn
+          retention-days: 14
