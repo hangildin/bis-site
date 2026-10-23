@@ -12,7 +12,7 @@ issues=[]
 class Parser(HTMLParser):
  def __init__(self):
   super().__init__(convert_charrefs=True)
-  self.h1=0;self.h2=0;self.h3=0;self.links=[];self.images=[];self.title=0
+  self.h1=0;self.h2=0;self.h3=0;self.links=[];self.images=[];self.title=0;self.cards=0
  def handle_starttag(self,tag,attrs):
   a=dict(attrs)
   if tag=="h1":self.h1+=1
@@ -20,13 +20,14 @@ class Parser(HTMLParser):
   if tag=="h3":self.h3+=1
   if tag=="title":self.title+=1
   if tag=="a" and "href" in a:self.links.append(a["href"])
+  if tag=="a" and "journal-card" in a.get("class","").split():self.cards+=1
   if tag=="img":self.images.append(a)
 def check(ok,description):
  if not ok:issues.append(description)
 hub=(ROOT/"journal.html").read_text(encoding="utf-8")
 nav=Parser();nav.feed(hub)
 check(nav.h1==1,"Journal must have one H1")
-check(nav.h2==len(PAGES),"Journal must link eight article cards")
+check(nav.cards==len(PAGES),"Journal must link eight article cards")
 for name in PAGES:
  check(f'href="{name}"' in hub, "Missing journal hub link: "+name)
  src=(ROOT/name).read_text(encoding="utf-8")
