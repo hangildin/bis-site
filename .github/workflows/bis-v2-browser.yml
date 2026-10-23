@@ -8,6 +8,9 @@ on:
       - 'scripts/visual_smoke_v2.mjs'
       - '.github/workflows/bis-v2-browser.yml'
   workflow_dispatch:
+concurrency:
+  group: bis-v2-browser-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -22,7 +25,8 @@ jobs:
       - name: Install headless browser
         run: |
           npm install --no-save --no-package-lock playwright@1.58.2
-          npx playwright install --with-deps chromium
+          command -v google-chrome
+          google-chrome --version
       - name: Start local site
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/bis-v2-server.log 2>&1 &
