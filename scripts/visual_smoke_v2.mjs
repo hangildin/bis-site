@@ -5,7 +5,7 @@ const pages=['index.html','services.html','corporate-events.html','city-events.h
 const views=[{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844},{name:'small-mobile',width:320,height:700}];
 const shots=new Set(['index.html','services.html','children-events.html','corporate-events.html','projects.html']);
 const result=[];
-const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',args:['--no-sandbox','--disable-dev-shm-usage']});
 fs.mkdirSync('artifacts/bis-v2-review',{recursive:true});
 for(const v of views){
  const context=await browser.newContext({viewport:{width:v.width,height:v.height},deviceScaleFactor:1,locale:'ru-RU',reducedMotion:'reduce'});
