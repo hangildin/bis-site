@@ -24,3 +24,4 @@ jobs:
           python3 .github/scripts/check_keyword_pilot_v2.py
           python3 .github/scripts/check_content_v2.py
           python3 .github/scripts/check_journal_v2.py
+          python3 scripts/check_release.py
