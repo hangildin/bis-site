@@ -7,7 +7,7 @@ import re
 ROOT = Path(__file__).resolve().parents[2]
 home = (ROOT / "index.html").read_text(encoding="utf-8")
 originals = ("Большие</span><span>интересные</span><span><em>события</em></span>",
-  "Более 12 лет создаём большие интересные события", "Работаем в России и за рубежом.",
+  "Создаём корпоративные события, городские праздники", "Работаем в России и за рубежом.",
   'href="tel:+79631223399"', 'href="mailto:bis.manager@vk.com"')
 services = {"corporate-events.html": "ХимФест",
   "city-events.html": "Зеленодольск", "brand-events.html": "Kastamonu",
@@ -38,7 +38,8 @@ if '<a class="btn btn-outline" href="#services">Наши услуги' not in ho
     errors.append("Secondary services CTA missing")
 if re.search(r'\.bis-services-grid\s*\{',home) is None or '@media(max-width:510px)' not in home:
     errors.append("Service mobile styles missing")
-if any(x not in home for x in originals):errors.append("Protected homepage content modified or removed")
+if any(x not in home for x in originals):errors.append("Protected verified homepage structure/content modified or removed")
+if "12+ лет" in home or "Более 12 лет" in home:errors.append("Unverified years-of-experience claim restored")
 for f,case in services.items():
     if f not in p.anchors:errors.append("Missing service route "+f)
     if case.lower() not in home.lower():errors.append("Missing case proof "+case)
