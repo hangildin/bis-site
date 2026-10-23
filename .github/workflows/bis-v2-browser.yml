@@ -32,7 +32,7 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/bis-v2-server.log 2>&1 &
           for i in {1..30}; do curl --silent --fail http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
           exit 1
-      - name: Screenshot and audit 16 pages
+      - name: Screenshot and audit 25 pages
         run: node scripts/visual_smoke_v2.mjs
       - name: Commit screenshot gallery to V2 branch only
         if: success() && github.ref == 'refs/heads/bis-v2-development'
