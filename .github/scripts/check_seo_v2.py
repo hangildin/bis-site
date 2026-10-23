@@ -4,7 +4,7 @@ import csv
 from html.parser import HTMLParser
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-PAGES=["corporate-events.html","city-events.html","brand-events.html","sports-events.html"]
+PAGES=["corporate-events.html","city-events.html","brand-events.html","sports-events.html","children-events.html"]
 LANDINGS=set(PAGES+["services.html"])
 issues=[]
 class Inspect(HTMLParser):
@@ -51,4 +51,4 @@ for index,row in enumerate(rows,2):
 if issues:
  for item in issues:print("ERROR:",item)
  raise SystemExit(1)
-print("BIS V2 SEO PASS: 4 unique service guides, 16 questions, 72 regional seed pairs, zero fabricated figures.")
+print("BIS V2 SEO PASS: 5 unique service guides, 20 questions, 72 regional seed pairs, zero fabricated figures.")
