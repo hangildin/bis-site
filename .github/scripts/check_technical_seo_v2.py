@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[2]
 BASE="https://hangildin.github.io/bis-site/"
 PAGES=["index.html","services.html","corporate-events.html","city-events.html",
-"brand-events.html","sports-events.html","projects.html","zelenodolsk.html",
+"brand-events.html","sports-events.html","children-events.html","projects.html","zelenodolsk.html",
 "himfest.html","kastamonu.html","spartakiada.html","festival-dobryh-del.html",
 "phuket-wedding.html","plehanov-reu.html","letters.html"]
 issues=[]
@@ -61,4 +61,4 @@ for name in PAGES:
    issues.append(f"{name}: missing image {target}")
 for problem in issues:print("ERROR:",problem)
 if issues:raise SystemExit(1)
-print("BIS V2 TECH SEO PASS: exactly 15 real pages, canonical, OG and sitemap consistent; staging noindex enforced.")
+print("BIS V2 TECH SEO PASS: exactly 16 real pages, canonical, OG and sitemap consistent; staging noindex enforced.")
