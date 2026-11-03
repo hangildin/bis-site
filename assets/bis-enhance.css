@@ -1,0 +1,12 @@
+/* BIS V2 release-only accessibility and mobile contact improvements. */
+.skip-to-content{position:absolute;z-index:1000;left:12px;top:-90px;background:#211f1d;color:#fff;padding:12px 18px;font-size:14px}
+.skip-to-content:focus{top:8px}
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid #d7552d;outline-offset:3px}
+.bis-mobile-contact{display:none}
+@media(max-width:640px){
+  body{padding-bottom:64px}
+  .bis-mobile-contact{position:fixed;display:flex;z-index:200;inset:auto 0 0;min-height:60px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:rgba(248,245,240,.98);box-shadow:0 -4px 20px rgba(15,12,10,.13);gap:9px;align-items:center}
+  .bis-mobile-contact a{display:flex;align-items:center;justify-content:center;flex:1;min-height:44px;font-size:12px;letter-spacing:.02em;font-weight:800;text-decoration:none;border:1px solid #211f1d;color:#211f1d}
+  .bis-mobile-contact a:last-child{background:#211f1d;color:#fff}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

@@ -1,0 +1,30 @@
+name: BIS V2 standalone website package
+on:
+  workflow_dispatch:
+  push:
+    branches: [bis-v2-development]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'ads/**'
+      - 'scripts/build_release.py'
+      - 'scripts/check_release.py'
+      - '.github/workflows/bis-v2-package.yml'
+permissions:
+  contents: read
+jobs:
+  package-static-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check production build and generate complete standalone website
+        run: |
+          python3 scripts/check_release.py
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site-v2/ --publish --out dist
+      - name: Upload full BIS Commercial V2 website
+        uses: actions/upload-artifact@v4
+        with:
+          name: BIS-V2-COMMERCIAL-WEBSITE
+          path: dist/
+          retention-days: 30
+          if-no-files-found: error

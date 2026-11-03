@@ -1,4 +1,4 @@
-name: Deploy BIS site to GitHub Pages
+name: Deploy BIS main site with V2
 on:
   push:
     branches: [main]
@@ -8,25 +8,30 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: bis-primary-pages
+  cancel-in-progress: false
 jobs:
   deploy:
+    if: github.repository == 'hangildin/bis-site'
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      url: https://hangildin.github.io/bis-site/
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/checkout@v4
+      - name: Build and verify primary commercial site
+        run: |
+          python3 -m pip install --user Pillow==11.3.0
+          python3 scripts/check_release.py
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site/ --publish --allow-primary-site --out dist
+          python3 scripts/optimize_release.py --dist dist
+          BIS_PRODUCTION_URL=https://hangildin.github.io/bis-site/ python3 scripts/check_dist.py dist
+      - uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
-          path: .
-      - name: Deploy
+          path: dist
+      - name: Publish BIS V2 on primary address
         id: deployment
         uses: actions/deploy-pages@v4

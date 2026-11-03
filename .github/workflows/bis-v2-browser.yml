@@ -1,0 +1,51 @@
+name: BIS v2 browser review
+on:
+  push:
+    branches: [bis-v2-development]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'scripts/**'
+      - '.github/workflows/bis-v2-browser.yml'
+  workflow_dispatch:
+concurrency:
+  group: bis-v2-browser-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  browser-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.58.2
+          command -v google-chrome
+          google-chrome --version
+      - name: Build real optimized public site
+        run: |
+          python3 -m pip install --user Pillow==11.3.0
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site-v2/ --publish --out dist
+          python3 scripts/optimize_release.py --dist dist
+          python3 scripts/check_dist.py dist
+      - name: Start local optimized site
+        run: |
+          cd dist
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/bis-v2-server.log 2>&1 &
+          for i in {1..30}; do curl --silent --fail http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Screenshot and audit 25 pages
+        run: node scripts/visual_smoke_v2.mjs
+      - name: Upload preview and audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bis-v2-review
+          path: artifacts/bis-v2-review
+          if-no-files-found: warn
+          retention-days: 14

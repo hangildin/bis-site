@@ -1,0 +1,21 @@
+name: BIS primary site live verification
+on:
+  workflow_run:
+    workflows: ["Deploy BIS main site with V2"]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Audit live main BIS website
+        env:
+          BIS_PRODUCTION_URL: https://hangildin.github.io/bis-site/
+        run: python3 scripts/check_live_site.py

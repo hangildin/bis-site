@@ -1,0 +1,55 @@
+name: BIS V2 independent Lighthouse audit
+on:
+  push:
+    branches: [bis-v2-development]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'scripts/**'
+      - '.github/workflows/bis-v2-lighthouse.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install audited tools
+        run: |
+          python3 -m pip install --user Pillow==11.3.0
+          npm install --no-save --no-package-lock lighthouse@12.8.2
+          command -v google-chrome
+      - name: Build and optimize the isolated public site
+        run: |
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site-v2/ --publish --out dist
+          python3 scripts/optimize_release.py --dist dist
+          python3 scripts/check_dist.py dist
+      - name: Start local static server
+        run: |
+          cd dist
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/bis-lighthouse-http.log 2>&1 &
+          for i in {1..30}; do curl --silent --fail http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Independent mobile performance, accessibility and SEO audits
+        run: |
+          mkdir -p audits
+          for page in index.html children-events.html journal.html corporate-events.html; do
+            node_modules/.bin/lighthouse "http://127.0.0.1:8765/$page" \
+              --chrome-path=/usr/bin/google-chrome \
+              --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+              --quiet --only-categories=performance,accessibility,best-practices,seo \
+              --output=json --output-path="audits/$page.json"
+          done
+          python3 scripts/report_lighthouse.py audits
+      - name: Store independent audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bis-v2-lighthouse-mobile
+          path: audits/
+          retention-days: 14
