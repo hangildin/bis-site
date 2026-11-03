@@ -1,0 +1,30 @@
+name: BIS primary production preflight
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  production-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate the exact primary BIS release before deployment
+        run: |
+          python3 -m pip install --user Pillow==11.3.0
+          python3 scripts/check_release.py
+          python3 scripts/build_release.py --base-url https://hangildin.github.io/bis-site/ --publish --allow-primary-site --out dist
+          python3 scripts/optimize_release.py --dist dist
+          BIS_PRODUCTION_URL=https://hangildin.github.io/bis-site/ python3 scripts/check_dist.py dist
+          if grep -q 'bis-site-v2/' dist/sitemap.xml; then
+            echo 'ERROR: preview address leaked into primary sitemap'
+            exit 1
+          fi
+          if grep -q '<meta name="robots" content="noindex' dist/index.html; then
+            echo 'ERROR: index blocked on primary'
+            exit 1
+          fi
