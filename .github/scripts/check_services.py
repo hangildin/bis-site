@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[2]
-PAGES = ["services.html", "corporate-events.html", "city-events.html", "brand-events.html", "sports-events.html"]
+PAGES = ["services.html", "corporate-events.html", "city-events.html", "brand-events.html", "sports-events.html", "children-events.html"]
 CASES = {"corporate-events.html": "himfest.html", "city-events.html": "zelenodolsk.html",
          "brand-events.html": "kastamonu.html", "sports-events.html": "spartakiada.html"}
 errors = []
@@ -71,7 +71,7 @@ for name in PAGES:
             if not target.is_relative_to(ROOT) or not target.is_file():
                 errors.append(f"{name}: missing image {img['src']}")
     if name != "services.html":
-        if CASES[name] not in p.anchor_hrefs:
+        if name in CASES and CASES[name] not in p.anchor_hrefs:
             errors.append(f"{name}: missing real case link")
         for other in PAGES:
             if other != name and other not in p.anchor_hrefs:
